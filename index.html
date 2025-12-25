@@ -3,24 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clic Social Banking | Build Your Community Bank</title>
+    <title>Clix Community Social Banking | Build Your Community Bank</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --color-burgundy: #7B2D3B;
-            --color-burgundy-dark: #5A1F2B;
-            --color-gold: #D4A853;
-            --color-gold-light: #F0D48A;
-            --color-cream: #FDF8F3;
-            --color-cream-dark: #F5EDE3;
-            --color-earth: #4A3728;
-            --color-earth-light: #6B5344;
-            --color-sage: #7A9E7E;
-            --color-sage-light: #A8C5AB;
-            --font-display: 'DM Serif Display', serif;
-            --font-body: 'Outfit', sans-serif;
+            --color-green: #10b981;
+            --color-green-dark: #059669;
+            --color-green-darker: #047857;
+            --color-blue: #3b82f6;
+            --color-blue-dark: #2563eb;
+            --color-blue-darker: #1d4ed8;
+            --color-gold: #f59e0b;
+            --color-gold-light: #fbbf24;
+            --color-gray-50: #f9fafb;
+            --color-gray-100: #f3f4f6;
+            --color-gray-200: #e5e7eb;
+            --color-gray-600: #4b5563;
+            --color-gray-700: #374151;
+            --color-gray-800: #1f2937;
+            --color-gray-900: #111827;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --gradient-main: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
+            --gradient-dark: linear-gradient(135deg, #047857 0%, #1d4ed8 100%);
         }
 
         * {
@@ -35,24 +41,10 @@
 
         body {
             font-family: var(--font-body);
-            background-color: var(--color-cream);
-            color: var(--color-earth);
+            background-color: var(--color-gray-50);
+            color: var(--color-gray-800);
             line-height: 1.6;
             overflow-x: hidden;
-        }
-
-        /* Noise texture overlay */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-            opacity: 0.03;
-            pointer-events: none;
-            z-index: 1000;
         }
 
         /* Navigation */
@@ -62,86 +54,61 @@
             left: 0;
             right: 0;
             z-index: 100;
-            padding: 1.5rem 4rem;
+            padding: 1rem 4rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: linear-gradient(to bottom, var(--color-cream), transparent);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
         }
 
-        nav.scrolled {
-            background: rgba(253, 248, 243, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 20px rgba(74, 55, 40, 0.08);
-        }
-
         .logo {
-            font-family: var(--font-display);
-            font-size: 1.8rem;
-            color: var(--color-burgundy);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
             text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
         }
 
-        .logo-icon {
-            width: 40px;
+        .logo img {
             height: 40px;
-            background: var(--color-burgundy);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: auto;
         }
 
-        .logo-icon svg {
-            width: 24px;
-            height: 24px;
-            fill: var(--color-gold);
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .nav-links {
             display: flex;
-            gap: 2.5rem;
+            gap: 2rem;
             align-items: center;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: var(--color-earth);
+            color: var(--color-gray-700);
             font-weight: 500;
             font-size: 0.95rem;
-            position: relative;
             transition: color 0.3s ease;
         }
 
         .nav-links a:hover {
-            color: var(--color-burgundy);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--color-gold);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
+            color: var(--color-green);
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.9rem 1.8rem;
-            border-radius: 50px;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
             font-size: 0.95rem;
@@ -151,37 +118,36 @@
         }
 
         .btn-primary {
-            background: var(--color-burgundy);
+            background: var(--gradient-main);
             color: white;
-            box-shadow: 0 4px 15px rgba(123, 45, 59, 0.3);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
         }
 
         .btn-primary:hover {
-            background: var(--color-burgundy-dark);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(123, 45, 59, 0.4);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
         }
 
         .btn-secondary {
-            background: transparent;
-            color: var(--color-burgundy);
-            border: 2px solid var(--color-burgundy);
+            background: white;
+            color: var(--color-green);
+            border: 2px solid var(--color-green);
         }
 
         .btn-secondary:hover {
-            background: var(--color-burgundy);
+            background: var(--color-green);
             color: white;
         }
 
         .btn-gold {
             background: linear-gradient(135deg, var(--color-gold), var(--color-gold-light));
-            color: var(--color-earth);
-            box-shadow: 0 4px 15px rgba(212, 168, 83, 0.4);
+            color: var(--color-gray-900);
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
         }
 
         .btn-gold:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(212, 168, 83, 0.5);
+            box-shadow: 0 6px 25px rgba(245, 158, 11, 0.5);
         }
 
         /* Hero Section */
@@ -192,33 +158,36 @@
             padding: 8rem 4rem 4rem;
             position: relative;
             overflow: hidden;
+            background: linear-gradient(135deg, #f0fdf4 0%, #dbeafe 100%);
         }
 
         .hero-bg {
             position: absolute;
             top: 0;
             right: 0;
-            width: 55%;
+            width: 50%;
             height: 100%;
-            background: linear-gradient(135deg, var(--color-burgundy) 0%, var(--color-burgundy-dark) 100%);
-            clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
-            z-index: -1;
+            background: var(--gradient-main);
+            clip-path: polygon(25% 0, 100% 0, 100% 100%, 0% 100%);
+            z-index: 0;
         }
 
         .hero-pattern {
             position: absolute;
             top: 0;
             right: 0;
-            width: 55%;
+            width: 50%;
             height: 100%;
-            clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
-            z-index: -1;
+            clip-path: polygon(25% 0, 100% 0, 100% 100%, 0% 100%);
+            z-index: 1;
             opacity: 0.1;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4A853' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
 
         .hero-content {
             max-width: 600px;
+            position: relative;
+            z-index: 2;
             animation: fadeInUp 1s ease;
         }
 
@@ -237,21 +206,21 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: var(--color-cream-dark);
+            background: white;
             padding: 0.5rem 1rem;
             border-radius: 50px;
             font-size: 0.85rem;
             font-weight: 500;
-            color: var(--color-burgundy);
+            color: var(--color-green-dark);
             margin-bottom: 1.5rem;
-            border: 1px solid rgba(123, 45, 59, 0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
         }
 
         .hero-tag::before {
             content: '';
             width: 8px;
             height: 8px;
-            background: var(--color-sage);
+            background: var(--color-green);
             border-radius: 50%;
             animation: pulse 2s infinite;
         }
@@ -262,33 +231,23 @@
         }
 
         .hero h1 {
-            font-family: var(--font-display);
-            font-size: 4rem;
+            font-size: 3.5rem;
             line-height: 1.1;
-            color: var(--color-earth);
+            color: var(--color-gray-900);
             margin-bottom: 1.5rem;
+            font-weight: 800;
         }
 
         .hero h1 span {
-            color: var(--color-burgundy);
-            position: relative;
-        }
-
-        .hero h1 span::after {
-            content: '';
-            position: absolute;
-            bottom: 5px;
-            left: 0;
-            width: 100%;
-            height: 8px;
-            background: var(--color-gold);
-            opacity: 0.4;
-            z-index: -1;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .hero p {
             font-size: 1.2rem;
-            color: var(--color-earth-light);
+            color: var(--color-gray-600);
             margin-bottom: 2.5rem;
             max-width: 500px;
         }
@@ -304,7 +263,7 @@
             gap: 3rem;
             margin-top: 4rem;
             padding-top: 2rem;
-            border-top: 1px solid rgba(74, 55, 40, 0.1);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         .stat {
@@ -317,21 +276,23 @@
         .stat:nth-child(3) { animation-delay: 0.6s; }
 
         .stat-number {
-            font-family: var(--font-display);
             font-size: 2.5rem;
-            color: var(--color-burgundy);
+            font-weight: 800;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .stat-label {
             font-size: 0.9rem;
-            color: var(--color-earth-light);
+            color: var(--color-gray-600);
         }
 
         /* Journey Section */
         .journey {
             padding: 8rem 4rem;
-            background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-cream-dark) 100%);
-            position: relative;
+            background: white;
         }
 
         .section-header {
@@ -344,22 +305,22 @@
             display: inline-block;
             font-size: 0.85rem;
             font-weight: 600;
-            color: var(--color-burgundy);
+            color: var(--color-green);
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-bottom: 1rem;
         }
 
         .section-header h2 {
-            font-family: var(--font-display);
-            font-size: 3rem;
-            color: var(--color-earth);
+            font-size: 2.5rem;
+            color: var(--color-gray-900);
             margin-bottom: 1rem;
+            font-weight: 800;
         }
 
         .section-header p {
             font-size: 1.1rem;
-            color: var(--color-earth-light);
+            color: var(--color-gray-600);
         }
 
         .journey-path {
@@ -377,11 +338,7 @@
             left: 10%;
             right: 10%;
             height: 4px;
-            background: linear-gradient(90deg, 
-                var(--color-burgundy) 0%, 
-                var(--color-gold) 50%, 
-                var(--color-sage) 100%
-            );
+            background: var(--gradient-main);
             border-radius: 2px;
             z-index: 0;
         }
@@ -403,14 +360,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 10px 40px rgba(74, 55, 40, 0.1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
             position: relative;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .journey-step:hover .step-icon {
             transform: translateY(-5px);
-            box-shadow: 0 15px 50px rgba(74, 55, 40, 0.15);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
         }
 
         .step-icon svg {
@@ -424,7 +381,7 @@
             right: -10px;
             width: 36px;
             height: 36px;
-            background: var(--color-burgundy);
+            background: var(--color-green);
             color: white;
             border-radius: 50%;
             display: flex;
@@ -432,32 +389,200 @@
             justify-content: center;
             font-weight: 700;
             font-size: 0.9rem;
-            box-shadow: 0 4px 10px rgba(123, 45, 59, 0.3);
+            box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
         }
 
-        .journey-step:nth-child(2) .step-number { background: var(--color-earth); }
-        .journey-step:nth-child(3) .step-number { background: var(--color-gold); color: var(--color-earth); }
-        .journey-step:nth-child(4) .step-number { background: var(--color-sage); }
-        .journey-step:nth-child(5) .step-number { background: var(--color-burgundy-dark); }
+        .journey-step:nth-child(2) .step-number { background: var(--color-blue); }
+        .journey-step:nth-child(3) .step-number { background: var(--color-gold); color: var(--color-gray-900); }
+        .journey-step:nth-child(4) .step-number { background: var(--color-green-dark); }
+        .journey-step:nth-child(5) .step-number { background: var(--color-blue-dark); }
 
         .journey-step h3 {
-            font-family: var(--font-display);
-            font-size: 1.3rem;
-            color: var(--color-earth);
+            font-size: 1.2rem;
+            color: var(--color-gray-900);
             margin-bottom: 0.75rem;
+            font-weight: 700;
         }
 
         .journey-step p {
             font-size: 0.95rem;
-            color: var(--color-earth-light);
+            color: var(--color-gray-600);
             max-width: 200px;
             margin: 0 auto;
+        }
+
+        /* CLIX Token Section */
+        .clix-token {
+            padding: 8rem 4rem;
+            background: linear-gradient(135deg, #f0fdf4 0%, #dbeafe 100%);
+        }
+
+        .token-hero {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .token-hero h2 {
+            font-size: 2.5rem;
+            color: var(--color-gray-900);
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .token-hero h2 span {
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .token-hero p {
+            font-size: 1.2rem;
+            color: var(--color-gray-600);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .token-highlights {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto 4rem;
+        }
+
+        .token-highlight {
+            text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .token-highlight-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .token-highlight h4 {
+            font-weight: 700;
+            color: var(--color-gray-900);
+            margin-bottom: 0.5rem;
+        }
+
+        .token-highlight p {
+            font-size: 0.9rem;
+            color: var(--color-gray-600);
+        }
+
+        .tokenomics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto 4rem;
+        }
+
+        .tokenomics-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .tokenomics-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .tokenomics-percent {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 1rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 800;
+        }
+
+        .tokenomics-card:nth-child(1) .tokenomics-percent { background: #d1fae5; color: #047857; }
+        .tokenomics-card:nth-child(2) .tokenomics-percent { background: #dbeafe; color: #1d4ed8; }
+        .tokenomics-card:nth-child(3) .tokenomics-percent { background: #f3e8ff; color: #7c3aed; }
+        .tokenomics-card:nth-child(4) .tokenomics-percent { background: #fed7aa; color: #c2410c; }
+
+        .tokenomics-card h4 {
+            font-weight: 700;
+            color: var(--color-gray-900);
+            margin-bottom: 0.5rem;
+        }
+
+        .tokenomics-card p {
+            font-size: 0.85rem;
+            color: var(--color-gray-600);
+        }
+
+        .use-cases {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .use-case {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .use-case:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .use-case-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            background: var(--color-gray-100);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .use-case h4 {
+            font-weight: 700;
+            color: var(--color-gray-900);
+            margin-bottom: 0.75rem;
+        }
+
+        .use-case p {
+            font-size: 0.9rem;
+            color: var(--color-gray-600);
+            margin-bottom: 1rem;
+        }
+
+        .use-case-tag {
+            background: linear-gradient(135deg, #dbeafe, #f0fdf4);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--color-blue-dark);
         }
 
         /* Features Section */
         .features {
             padding: 8rem 4rem;
-            background: var(--color-burgundy);
+            background: var(--gradient-dark);
             position: relative;
             overflow: hidden;
         }
@@ -469,7 +594,7 @@
             right: -20%;
             width: 60%;
             height: 200%;
-            background: radial-gradient(circle, rgba(212, 168, 83, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
             pointer-events: none;
         }
 
@@ -478,11 +603,11 @@
         }
 
         .features .section-header p {
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .features .section-tag {
-            color: var(--color-gold);
+            color: var(--color-gold-light);
         }
 
         .features-grid {
@@ -494,25 +619,25 @@
         }
 
         .feature-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            padding: 2rem;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
         }
 
         .feature-card:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.15);
             transform: translateY(-5px);
-            border-color: rgba(212, 168, 83, 0.3);
+            border-color: rgba(255, 255, 255, 0.25);
         }
 
         .feature-icon {
             width: 60px;
             height: 60px;
             background: linear-gradient(135deg, var(--color-gold), var(--color-gold-light));
-            border-radius: 15px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -522,18 +647,18 @@
         .feature-icon svg {
             width: 30px;
             height: 30px;
-            fill: var(--color-earth);
+            fill: var(--color-gray-900);
         }
 
         .feature-card h3 {
-            font-family: var(--font-display);
-            font-size: 1.4rem;
+            font-size: 1.25rem;
             color: white;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
         }
 
         .feature-card p {
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 255, 255, 0.8);
             font-size: 0.95rem;
             line-height: 1.7;
         }
@@ -541,7 +666,7 @@
         /* How It Works Detail */
         .how-it-works {
             padding: 8rem 4rem;
-            background: var(--color-cream);
+            background: white;
         }
 
         .steps-detail {
@@ -564,7 +689,7 @@
             top: 100px;
             bottom: -3rem;
             width: 2px;
-            background: linear-gradient(to bottom, var(--color-burgundy), transparent);
+            background: linear-gradient(to bottom, var(--color-green), transparent);
         }
 
         .step-detail:nth-child(even) {
@@ -584,11 +709,11 @@
         .step-image {
             width: 100%;
             aspect-ratio: 4/3;
-            background: var(--color-cream-dark);
-            border-radius: 20px;
+            background: var(--color-gray-100);
+            border-radius: 16px;
             overflow: hidden;
             position: relative;
-            box-shadow: 0 20px 60px rgba(74, 55, 40, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
         }
 
         .step-image-inner {
@@ -597,34 +722,34 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, var(--color-burgundy) 0%, var(--color-burgundy-dark) 100%);
+            background: var(--gradient-main);
         }
 
         .step-image-inner svg {
             width: 80px;
             height: 80px;
-            fill: var(--color-gold);
-            opacity: 0.8;
+            fill: white;
+            opacity: 0.9;
         }
 
         .step-badge {
             position: absolute;
             top: -15px;
             left: -15px;
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             background: var(--color-gold);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 10px 30px rgba(212, 168, 83, 0.4);
+            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.4);
         }
 
         .step-badge span {
-            font-family: var(--font-display);
-            font-size: 2rem;
-            color: var(--color-earth);
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--color-gray-900);
         }
 
         .step-content {
@@ -633,14 +758,14 @@
         }
 
         .step-content h3 {
-            font-family: var(--font-display);
-            font-size: 1.8rem;
-            color: var(--color-earth);
+            font-size: 1.75rem;
+            color: var(--color-gray-900);
             margin-bottom: 1rem;
+            font-weight: 700;
         }
 
         .step-content p {
-            color: var(--color-earth-light);
+            color: var(--color-gray-600);
             font-size: 1.05rem;
             margin-bottom: 1.5rem;
             line-height: 1.8;
@@ -657,23 +782,22 @@
             align-items: center;
             gap: 0.5rem;
             padding: 0.5rem 1rem;
-            background: white;
+            background: var(--color-gray-100);
             border-radius: 50px;
             font-size: 0.85rem;
-            color: var(--color-earth);
-            box-shadow: 0 2px 10px rgba(74, 55, 40, 0.05);
+            color: var(--color-gray-700);
         }
 
         .step-feature svg {
             width: 16px;
             height: 16px;
-            fill: var(--color-sage);
+            fill: var(--color-green);
         }
 
         /* CTA Section */
         .cta {
             padding: 8rem 4rem;
-            background: linear-gradient(135deg, var(--color-earth) 0%, var(--color-earth-light) 100%);
+            background: var(--gradient-dark);
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -687,7 +811,7 @@
             transform: translate(-50%, -50%);
             width: 150%;
             height: 150%;
-            background: radial-gradient(circle, rgba(212, 168, 83, 0.1) 0%, transparent 50%);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
             pointer-events: none;
         }
 
@@ -699,15 +823,15 @@
         }
 
         .cta h2 {
-            font-family: var(--font-display);
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: white;
             margin-bottom: 1.5rem;
+            font-weight: 800;
         }
 
         .cta p {
             font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.9);
             margin-bottom: 2.5rem;
         }
 
@@ -720,8 +844,8 @@
 
         /* Footer */
         footer {
-            padding: 4rem;
-            background: var(--color-earth);
+            padding: 3rem 4rem;
+            background: var(--color-gray-900);
         }
 
         .footer-content {
@@ -735,12 +859,21 @@
         }
 
         .footer-logo {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            color: white;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
+        }
+
+        .footer-logo img {
+            height: 32px;
+            width: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        .footer-logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: white;
         }
 
         .footer-links {
@@ -756,7 +889,30 @@
         }
 
         .footer-links a:hover {
+            color: var(--color-green);
+        }
+
+        .footer-powered {
+            text-align: center;
+            width: 100%;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-powered a {
             color: var(--color-gold);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .footer-powered a:hover {
+            color: var(--color-gold-light);
+        }
+
+        .footer-powered span {
+            color: rgba(255, 255, 255, 0.6);
         }
 
         .footer-social {
@@ -776,7 +932,7 @@
         }
 
         .social-link:hover {
-            background: var(--color-gold);
+            background: var(--color-green);
         }
 
         .social-link svg {
@@ -785,33 +941,38 @@
             fill: white;
         }
 
-        .social-link:hover svg {
-            fill: var(--color-earth);
-        }
-
         /* Responsive */
         @media (max-width: 1024px) {
-            .hero h1 { font-size: 3rem; }
-            .hero-bg { width: 45%; clip-path: polygon(30% 0, 100% 0, 100% 100%, 10% 100%); }
-            .hero-pattern { width: 45%; clip-path: polygon(30% 0, 100% 0, 100% 100%, 10% 100%); }
+            .hero h1 { font-size: 2.75rem; }
+            .hero-bg, .hero-pattern { width: 45%; clip-path: polygon(35% 0, 100% 0, 100% 100%, 15% 100%); }
             .journey-path { flex-wrap: wrap; gap: 2rem; }
             .journey-path::before { display: none; }
             .journey-step { flex: 0 0 calc(33.333% - 1.5rem); }
             .features-grid { grid-template-columns: repeat(2, 1fr); }
+            .tokenomics-grid { grid-template-columns: repeat(2, 1fr); }
+            .use-cases { grid-template-columns: repeat(2, 1fr); }
+            .token-highlights { grid-template-columns: repeat(3, 1fr); }
         }
 
         @media (max-width: 768px) {
             nav { padding: 1rem 1.5rem; }
             .nav-links { display: none; }
-            .hero { padding: 6rem 1.5rem 3rem; flex-direction: column; }
+            .hero { padding: 6rem 1.5rem 3rem; }
             .hero-bg, .hero-pattern { display: none; }
-            .hero h1 { font-size: 2.5rem; }
+            .hero h1 { font-size: 2.25rem; }
             .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
             .journey { padding: 4rem 1.5rem; }
             .journey-step { flex: 0 0 calc(50% - 1rem); }
             .section-header h2 { font-size: 2rem; }
             .features { padding: 4rem 1.5rem; }
             .features-grid { grid-template-columns: 1fr; }
+            .clix-token { padding: 4rem 1.5rem; }
+            .tokenomics-grid { grid-template-columns: 1fr 1fr; }
+            .use-cases { grid-template-columns: 1fr; }
+            .token-highlights { grid-template-columns: 1fr; }
+            .core-concept-grid { grid-template-columns: 1fr !important; }
+            .growth-metrics { grid-template-columns: 1fr 1fr !important; }
+            .clix-difference { grid-template-columns: 1fr !important; }
             .how-it-works { padding: 4rem 1.5rem; }
             .step-detail { flex-direction: column !important; gap: 1.5rem; }
             .step-detail::after { display: none; }
@@ -839,16 +1000,15 @@
     <!-- Navigation -->
     <nav id="navbar">
         <a href="#" class="logo">
-            <div class="logo-icon">
-                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-            </div>
-            Clic Social Banking
+            <img src="assets/clix-logo.png" alt="Clix">
+            <span class="logo-text">Community Social Banking</span>
         </a>
         <div class="nav-links">
             <a href="#journey">How It Works</a>
+            <a href="#clix-token">CLIX Token</a>
             <a href="#features">Features</a>
             <a href="#steps">Get Started</a>
-            <a href="#" class="btn btn-primary">Download Wallet</a>
+            <a href="https://play.google.com/store/apps/details?id=com.clix.app&hl=en" target="_blank" class="btn btn-primary">Download Clix Wallet</a>
         </div>
     </nav>
 
@@ -858,12 +1018,12 @@
         <div class="hero-pattern"></div>
         <div class="hero-content">
             <div class="hero-tag">Empowering Communities Through Finance</div>
-            <h1>Build Your Own <span>Social Bank</span> From The Ground Up</h1>
-            <p>Start with a group of friends. Grow into a fully-fledged community bank. The Clic Social Banking platform turns your community's financial dreams into reality.</p>
+            <h1>Build Your Own <span>Community Social Bank</span> From The Ground Up</h1>
+            <p>Start with a group of friends. Grow into a fully-fledged community bank. The Clix Community Social Banking platform turns your community's financial dreams into reality.</p>
             <div class="hero-buttons">
-                <a href="#" class="btn btn-primary">
+                <a href="https://play.google.com/store/apps/details?id=com.clix.app&hl=en" target="_blank" class="btn btn-primary">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.707 10.708L16.293 9.294 13 12.587V2h-2v10.587l-3.293-3.293-1.414 1.414L12 16.415l5.707-5.707z"/><path d="M18 18H6v-4H4v4c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-4h-2v4z"/></svg>
-                    Download Clic Wallet
+                    Download Clix Wallet
                 </a>
                 <a href="#journey" class="btn btn-secondary">See How It Works</a>
             </div>
@@ -888,25 +1048,25 @@
     <section class="journey" id="journey">
         <div class="section-header reveal">
             <span class="section-tag">Your Journey</span>
-            <h2>From Download to Social Bank in 5 Steps</h2>
+            <h2>From Download to Community Social Bank in 5 Steps</h2>
             <p>We've made the path to running your own community bank simple, transparent, and rewarding</p>
         </div>
         <div class="journey-path">
             <div class="journey-step reveal">
                 <div class="step-icon">
                     <span class="step-number">1</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-burgundy)" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-green)" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                 </div>
                 <h3>Download Wallet</h3>
-                <p>Get the Clic Wallet app and create your secure account</p>
+                <p>Get the Clix Wallet app and create your secure account</p>
             </div>
             <div class="journey-step reveal">
                 <div class="step-icon">
                     <span class="step-number">2</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-earth)" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-blue)" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                 </div>
                 <h3>Create Group</h3>
-                <p>Start a savings group within the Clic Wallet</p>
+                <p>Start a savings group within the Clix Wallet</p>
             </div>
             <div class="journey-step reveal">
                 <div class="step-icon">
@@ -919,7 +1079,7 @@
             <div class="journey-step reveal">
                 <div class="step-icon">
                     <span class="step-number">4</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-sage)" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20"/><path d="M6 16h4"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-green-dark)" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20"/><path d="M6 16h4"/></svg>
                 </div>
                 <h3>Practice Banking</h3>
                 <p>Save together, access group loans, learn the ropes</p>
@@ -927,11 +1087,209 @@
             <div class="journey-step reveal">
                 <div class="step-icon">
                     <span class="step-number">5</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-burgundy-dark)" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21V12h6v9"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-blue-dark)" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21V12h6v9"/></svg>
                 </div>
-                <h3>Launch Social Bank</h3>
-                <p>Graduate to a full Social Bank on our platform</p>
+                <h3>Launch Community Social Bank</h3>
+                <p>Graduate to a full Community Social Bank on our platform</p>
             </div>
+        </div>
+    </section>
+
+    <!-- CLIX Token Section -->
+    <section class="clix-token" id="clix-token">
+        <div class="token-hero reveal">
+            <span class="section-tag">The CLIX Token</span>
+            <h2><span>CLIX:</span> Finance's Third Way</h2>
+            <p>The financial upgrade that puts communities first. CLIX combines a complete social financial platform with a community-focussed token, delivering real financial empowerment beyond traditional banking and crypto speculation.</p>
+            
+            <div class="token-highlights">
+                <div class="token-highlight">
+                    <div class="token-highlight-icon">🌍</div>
+                    <h4>African-Born</h4>
+                    <p>Social finance platform</p>
+                </div>
+                <div class="token-highlight">
+                    <div class="token-highlight-icon">🏦</div>
+                    <h4>Real-World Assets</h4>
+                    <p>Buy gold and securities</p>
+                </div>
+                <div class="token-highlight">
+                    <div class="token-highlight-icon">🤝</div>
+                    <h4>Community-Focussed</h4>
+                    <p>Regulatory aligned</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-header reveal">
+            <h3 style="font-size: 1.75rem; color: var(--color-gray-900); margin-bottom: 1rem;">Token Economics</h3>
+            <p><strong>10 Billion CLIX</strong> total supply distributed for maximum community benefit</p>
+        </div>
+
+        <div class="tokenomics-grid reveal">
+            <div class="tokenomics-card">
+                <div class="tokenomics-percent">40%</div>
+                <h4>Community Rewards</h4>
+                <p>Directly benefiting ecosystem participants</p>
+            </div>
+            <div class="tokenomics-card">
+                <div class="tokenomics-percent">25%</div>
+                <h4>Green Projects</h4>
+                <p>Sustainable development initiatives</p>
+            </div>
+            <div class="tokenomics-card">
+                <div class="tokenomics-percent">20%</div>
+                <h4>Development</h4>
+                <p>Platform enhancement and innovation</p>
+            </div>
+            <div class="tokenomics-card">
+                <div class="tokenomics-percent">15%</div>
+                <h4>Team & Reserves</h4>
+                <p>Long-term sustainability and operations</p>
+            </div>
+        </div>
+
+        <div class="section-header reveal">
+            <h3 style="font-size: 1.75rem; color: var(--color-gray-900); margin-bottom: 1rem;">Four Pillars of Utility</h3>
+            <p>The CLIX token serves as payment medium, investment vehicle, loyalty rewards, and governance voting</p>
+        </div>
+
+        <div class="use-cases reveal">
+            <div class="use-case">
+                <div class="use-case-icon">💸</div>
+                <h4>Payments</h4>
+                <p>Cross-border remittances, micro-transactions, and merchant adoption for seamless financial flows.</p>
+                <span class="use-case-tag">Fast & affordable global transfers</span>
+            </div>
+            <div class="use-case">
+                <div class="use-case-icon">📈</div>
+                <h4>Investment</h4>
+                <p>Green project funding, staking rewards, and real-world asset tokenization liquidity.</p>
+                <span class="use-case-tag">Real assets, real returns</span>
+            </div>
+            <div class="use-case">
+                <div class="use-case-icon">🤝</div>
+                <h4>Social Finance</h4>
+                <p>Community profit-sharing and loyalty rewards for active ecosystem engagement.</p>
+                <span class="use-case-tag">Community wealth sharing</span>
+            </div>
+            <div class="use-case">
+                <div class="use-case-icon">🗳️</div>
+                <h4>Governance</h4>
+                <p>Ecosystem decision-making and project funding votes for democratic participation.</p>
+                <span class="use-case-tag">Your voice, your vote</span>
+            </div>
+        </div>
+
+        <!-- Core Concept Section -->
+        <div class="section-header reveal" style="margin-top: 5rem;">
+            <h3 style="font-size: 1.75rem; color: var(--color-gray-900); margin-bottom: 1rem;">Beyond Traditional Finance vs. Crypto</h3>
+            <p>CLIX combines traditional finance stability with blockchain innovation, serving real-world needs rather than speculation</p>
+        </div>
+
+        <div class="core-concept-grid reveal" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; max-width: 1000px; margin: 2rem auto 4rem;">
+            <div style="background: white; border-radius: 16px; padding: 2rem; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); border: 1px solid var(--color-gray-200);">
+                <h4 style="font-size: 1.25rem; font-weight: 700; color: var(--color-gray-900); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;">
+                    <span style="font-size: 1.5rem;">⚡</span>
+                    Hybrid Blockchain Approach
+                </h4>
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <div style="display: flex; align-items: center; padding: 1rem; background: #dbeafe; border-radius: 8px;">
+                        <div style="background: var(--color-blue); border-radius: 50%; width: 12px; height: 12px; margin-right: 0.75rem;"></div>
+                        <div><strong style="color: #1e40af;">Stellar Network:</strong> <span style="color: #1e3a8a;">Fast transactions & low costs</span></div>
+                    </div>
+                    <div style="display: flex; align-items: center; padding: 1rem; background: #f3e8ff; border-radius: 8px;">
+                        <div style="background: #7c3aed; border-radius: 50%; width: 12px; height: 12px; margin-right: 0.75rem;"></div>
+                        <div><strong style="color: #5b21b6;">BSC Integration:</strong> <span style="color: #4c1d95;">DeFi capabilities & governance</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: white; border-radius: 16px; padding: 2rem; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); border: 1px solid var(--color-gray-200);">
+                <h4 style="font-size: 1.25rem; font-weight: 700; color: var(--color-gray-900); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;">
+                    <span style="font-size: 1.5rem;">🎯</span>
+                    Circular Economy Vision
+                </h4>
+                <p style="color: var(--color-gray-600); margin-bottom: 1rem;">
+                    Creating sustainable wealth generation where communities both create and share value, moving beyond extraction-based models.
+                </p>
+                <div style="background: #d1fae5; padding: 1rem; border-radius: 8px; border-left: 4px solid var(--color-green);">
+                    <p style="color: #047857; font-weight: 600; margin: 0;">"Communities generate and share wealth sustainably"</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Growth Strategy Section -->
+        <div class="section-header reveal">
+            <h3 style="font-size: 1.75rem; color: var(--color-gray-900); margin-bottom: 1rem;">Ambitious Growth Vision</h3>
+            <p>Building the largest community-owned financial ecosystem globally</p>
+        </div>
+
+        <div class="growth-metrics reveal" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; max-width: 1200px; margin: 2rem auto 4rem;">
+            <div style="background: var(--gradient-main); border-radius: 16px; padding: 1.5rem; text-align: center; color: white;">
+                <div style="font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem;">60M</div>
+                <div style="font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem;">Target Users by 2035</div>
+                <div style="font-size: 0.85rem; opacity: 0.9;">54M Africa + 6M Diaspora</div>
+            </div>
+            <div style="background: var(--gradient-main); border-radius: 16px; padding: 1.5rem; text-align: center; color: white;">
+                <div style="font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem;">$15B</div>
+                <div style="font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem;">Annual Transaction Volume</div>
+                <div style="font-size: 0.85rem; opacity: 0.9;">Target market goal</div>
+            </div>
+            <div style="background: var(--gradient-main); border-radius: 16px; padding: 1.5rem; text-align: center; color: white;">
+                <div style="font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem;">40+</div>
+                <div style="font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem;">Global Markets</div>
+                <div style="font-size: 0.85rem; opacity: 0.9;">Starting with 24 African countries</div>
+            </div>
+            <div style="background: var(--gradient-main); border-radius: 16px; padding: 1.5rem; text-align: center; color: white;">
+                <div style="font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem;">$5B</div>
+                <div style="font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem;">Market Cap Goal</div>
+                <div style="font-size: 0.85rem; opacity: 0.9;">Sustainable growth target</div>
+            </div>
+        </div>
+
+        <!-- The CLIX Difference Section -->
+        <div class="section-header reveal">
+            <h3 style="font-size: 1.75rem; color: var(--color-gray-900); margin-bottom: 1rem;">The CLIX Difference</h3>
+            <p>A practical, community-focussed alternative serving real-world needs</p>
+        </div>
+
+        <div class="clix-difference reveal" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 1200px; margin: 2rem auto 3rem;">
+            <div style="background: white; border-radius: 16px; padding: 2rem; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); text-align: center; transition: all 0.3s ease;">
+                <div style="background: #d1fae5; border-radius: 50%; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 2rem;">🌍</div>
+                <h4 style="font-size: 1.25rem; font-weight: 700; color: var(--color-gray-900); margin-bottom: 1rem;">African Markets Focus</h4>
+                <p style="color: var(--color-gray-600); margin-bottom: 1rem; font-size: 0.95rem;">Strong emphasis on African markets and diaspora connections for inclusive finance.</p>
+                <div style="background: #d1fae5; padding: 0.75rem; border-radius: 8px;">
+                    <p style="color: #047857; font-size: 0.85rem; font-weight: 600; margin: 0;">24 countries and expanding</p>
+                </div>
+            </div>
+
+            <div style="background: white; border-radius: 16px; padding: 2rem; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); text-align: center; transition: all 0.3s ease;">
+                <div style="background: #dbeafe; border-radius: 50%; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 2rem;">⚖️</div>
+                <h4 style="font-size: 1.25rem; font-weight: 700; color: var(--color-gray-900); margin-bottom: 1rem;">Stability Meets Innovation</h4>
+                <p style="color: var(--color-gray-600); margin-bottom: 1rem; font-size: 0.95rem;">Beyond volatile crypto speculation - real-world asset backing with blockchain efficiency.</p>
+                <div style="background: #dbeafe; padding: 0.75rem; border-radius: 8px;">
+                    <p style="color: #1d4ed8; font-size: 0.85rem; font-weight: 600; margin: 0;">Gold & bonds backed</p>
+                </div>
+            </div>
+
+            <div style="background: white; border-radius: 16px; padding: 2rem; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); text-align: center; transition: all 0.3s ease;">
+                <div style="background: #f3e8ff; border-radius: 50%; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 2rem;">🚀</div>
+                <h4 style="font-size: 1.25rem; font-weight: 700; color: var(--color-gray-900); margin-bottom: 1rem;">Community-Driven Growth</h4>
+                <p style="color: var(--color-gray-600); margin-bottom: 1rem; font-size: 0.95rem;">Democratic governance where community members shape the ecosystem's future together.</p>
+                <div style="background: #f3e8ff; padding: 0.75rem; border-radius: 8px;">
+                    <p style="color: #7c3aed; font-size: 0.85rem; font-weight: 600; margin: 0;">Your ecosystem, your rules</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="reveal" style="background: linear-gradient(135deg, #dbeafe, #d1fae5); border-radius: 16px; padding: 2rem; border: 1px solid #bfdbfe; text-align: center; max-width: 1000px; margin: 0 auto;">
+            <p style="font-size: 1.25rem; font-weight: 600; color: var(--color-gray-800); margin-bottom: 0.5rem;">
+                CLIX: Where traditional finance stability meets blockchain innovation
+            </p>
+            <p style="font-size: 1.1rem; font-weight: 700; color: var(--color-blue); margin: 0;">
+                Finance's Third Way - Born in Africa, Built for the World
+            </p>
         </div>
     </section>
 
@@ -976,7 +1334,7 @@
                     <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
                 </div>
                 <h3>Regulatory Compliance</h3>
-                <p>Operate within the law from day one. Our commercial bank partnership ensures your Social Bank meets all regulatory requirements.</p>
+                <p>Operate within the law from day one. Our commercial bank partnership ensures your Community Social Bank meets all regulatory requirements.</p>
             </div>
             <div class="feature-card reveal">
                 <div class="feature-icon">
@@ -993,7 +1351,7 @@
         <div class="section-header reveal">
             <span class="section-tag">Step By Step</span>
             <h2>Your Path to Community Banking</h2>
-            <p>Here's exactly how to go from zero to running your own Social Bank</p>
+            <p>Here's exactly how to go from zero to running your own Community Social Bank</p>
         </div>
         <div class="steps-detail">
             <div class="step-detail reveal">
@@ -1007,7 +1365,7 @@
                 </div>
                 <div class="step-content">
                     <h3>Download & Register</h3>
-                    <p>Start by downloading the Clic Wallet from your app store. Registration takes just minutes—verify your phone number, create a secure PIN, and you're ready to go. Your wallet is your gateway to community banking.</p>
+                    <p>Start by downloading the Clix Wallet from the Play Store. Registration takes just minutes—verify your phone number, create a secure PIN, and you're ready to go. Your wallet is your gateway to community banking.</p>
                     <div class="step-features">
                         <span class="step-feature">
                             <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
@@ -1036,7 +1394,7 @@
                 </div>
                 <div class="step-content">
                     <h3>Create Your Savings Group</h3>
-                    <p>From within the Clic Wallet, create your first savings group. Give it a name that reflects your community, set your savings goals, and establish the basic rules that will govern how your group operates.</p>
+                    <p>From within the Clix Wallet, create your first savings group. Give it a name that reflects your community, set your savings goals, and establish the basic rules that will govern how your group operates.</p>
                     <div class="step-features">
                         <span class="step-feature">
                             <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
@@ -1065,7 +1423,7 @@
                 </div>
                 <div class="step-content">
                     <h3>Invite Your Community</h3>
-                    <p>Share your group invite link with friends, family, neighbors, or colleagues. You need a minimum of 20 members to qualify for Social Bank status. Each member downloads the wallet and joins your group.</p>
+                    <p>Share your group invite link with friends, family, neighbors, or colleagues. You need a minimum of 20 members to qualify for Community Social Bank status. Each member downloads the wallet and joins your group.</p>
                     <div class="step-features">
                         <span class="step-feature">
                             <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
@@ -1122,8 +1480,8 @@
                     <div class="step-badge"><span>5</span></div>
                 </div>
                 <div class="step-content">
-                    <h3>Launch Your Social Bank</h3>
-                    <p>Once you have 20+ active members and have demonstrated consistent group activity, you're eligible to upgrade to a full Social Bank on the Clic platform. This gives you access to enhanced features, higher limits, and official recognition as a community banking institution.</p>
+                    <h3>Launch Your Community Social Bank</h3>
+                    <p>Once you have 20+ active members and have demonstrated consistent group activity, you're eligible to upgrade to a full Community Social Bank on the Clix platform. This gives you access to enhanced features, higher limits, and official recognition as a community banking institution.</p>
                     <div class="step-features">
                         <span class="step-feature">
                             <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
@@ -1147,11 +1505,11 @@
     <section class="cta">
         <div class="cta-content reveal">
             <h2>Ready to Build Your Community Bank?</h2>
-            <p>Join thousands of community leaders who are transforming their neighborhoods through social banking. Your journey starts with a single download.</p>
+            <p>Join thousands of community leaders who are transforming their neighborhoods through community social banking. Your journey starts with a single download.</p>
             <div class="cta-buttons">
-                <a href="#" class="btn btn-gold">
+                <a href="https://play.google.com/store/apps/details?id=com.clix.app&hl=en" target="_blank" class="btn btn-gold">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.707 10.708L16.293 9.294 13 12.587V2h-2v10.587l-3.293-3.293-1.414 1.414L12 16.415l5.707-5.707z"/><path d="M18 18H6v-4H4v4c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-4h-2v4z"/></svg>
-                    Download Clic Wallet Now
+                    Download Clix Wallet Now
                 </a>
                 <a href="#" class="btn btn-secondary" style="border-color: rgba(255,255,255,0.3); color: white;">
                     Talk to Our Team
@@ -1164,10 +1522,8 @@
     <footer>
         <div class="footer-content">
             <div class="footer-logo">
-                <div class="logo-icon" style="width: 32px; height: 32px;">
-                    <svg viewBox="0 0 24 24" style="width: 18px; height: 18px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                </div>
-                Clic Social Banking
+                <img src="assets/clix-logo.png" alt="Clix">
+                <span class="footer-logo-text">Clix Community Social Banking</span>
             </div>
             <div class="footer-links">
                 <a href="#">About Us</a>
@@ -1188,19 +1544,12 @@
                 </a>
             </div>
         </div>
+        <div class="footer-powered">
+            <span>Powered by </span><a href="https://www.clic.world" target="_blank">Clic.World</a>
+        </div>
     </footer>
 
     <script>
-        // Navbar scroll effect
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
         // Reveal animations on scroll
         const revealElements = document.querySelectorAll('.reveal');
         
