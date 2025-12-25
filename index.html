@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clic Social Banking | Build Your Community Bank</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-burgundy: #7B2D3B;
+            --color-burgundy-dark: #5A1F2B;
+            --color-gold: #D4A853;
+            --color-gold-light: #F0D48A;
+            --color-cream: #FDF8F3;
+            --color-cream-dark: #F5EDE3;
+            --color-earth: #4A3728;
+            --color-earth-light: #6B5344;
+            --color-sage: #7A9E7E;
+            --color-sage-light: #A8C5AB;
+            --font-display: 'DM Serif Display', serif;
+            --font-body: 'Outfit', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-cream);
+            color: var(--color-earth);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Noise texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--color-cream), transparent);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(253, 248, 243, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(74, 55, 40, 0.08);
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            color: var(--color-burgundy);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--color-burgundy);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--color-gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--color-earth);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-burgundy);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.9rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--color-burgundy);
+            color: white;
+            box-shadow: 0 4px 15px rgba(123, 45, 59, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--color-burgundy-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(123, 45, 59, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-burgundy);
+            border: 2px solid var(--color-burgundy);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-burgundy);
+            color: white;
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--color-gold), var(--color-gold-light));
+            color: var(--color-earth);
+            box-shadow: 0 4px 15px rgba(212, 168, 83, 0.4);
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(212, 168, 83, 0.5);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 4rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 55%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--color-burgundy) 0%, var(--color-burgundy-dark) 100%);
+            clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+            z-index: -1;
+        }
+
+        .hero-pattern {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 55%;
+            height: 100%;
+            clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+            z-index: -1;
+            opacity: 0.1;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4A853' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .hero-content {
+            max-width: 600px;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--color-cream-dark);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--color-burgundy);
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(123, 45, 59, 0.1);
+        }
+
+        .hero-tag::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--color-sage);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            line-height: 1.1;
+            color: var(--color-earth);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 span {
+            color: var(--color-burgundy);
+            position: relative;
+        }
+
+        .hero h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: var(--color-gold);
+            opacity: 0.4;
+            z-index: -1;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--color-earth-light);
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(74, 55, 40, 0.1);
+        }
+
+        .stat {
+            animation: fadeInUp 1s ease;
+            animation-fill-mode: both;
+        }
+
+        .stat:nth-child(1) { animation-delay: 0.2s; }
+        .stat:nth-child(2) { animation-delay: 0.4s; }
+        .stat:nth-child(3) { animation-delay: 0.6s; }
+
+        .stat-number {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--color-burgundy);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--color-earth-light);
+        }
+
+        /* Journey Section */
+        .journey {
+            padding: 8rem 4rem;
+            background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-cream-dark) 100%);
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 5rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--color-burgundy);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            color: var(--color-earth);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--color-earth-light);
+        }
+
+        .journey-path {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .journey-path::before {
+            content: '';
+            position: absolute;
+            top: 60px;
+            left: 10%;
+            right: 10%;
+            height: 4px;
+            background: linear-gradient(90deg, 
+                var(--color-burgundy) 0%, 
+                var(--color-gold) 50%, 
+                var(--color-sage) 100%
+            );
+            border-radius: 2px;
+            z-index: 0;
+        }
+
+        .journey-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            padding: 0 1rem;
+        }
+
+        .step-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1.5rem;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 40px rgba(74, 55, 40, 0.1);
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .journey-step:hover .step-icon {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(74, 55, 40, 0.15);
+        }
+
+        .step-icon svg {
+            width: 50px;
+            height: 50px;
+        }
+
+        .step-number {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 36px;
+            height: 36px;
+            background: var(--color-burgundy);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 10px rgba(123, 45, 59, 0.3);
+        }
+
+        .journey-step:nth-child(2) .step-number { background: var(--color-earth); }
+        .journey-step:nth-child(3) .step-number { background: var(--color-gold); color: var(--color-earth); }
+        .journey-step:nth-child(4) .step-number { background: var(--color-sage); }
+        .journey-step:nth-child(5) .step-number { background: var(--color-burgundy-dark); }
+
+        .journey-step h3 {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            color: var(--color-earth);
+            margin-bottom: 0.75rem;
+        }
+
+        .journey-step p {
+            font-size: 0.95rem;
+            color: var(--color-earth-light);
+            max-width: 200px;
+            margin: 0 auto;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 8rem 4rem;
+            background: var(--color-burgundy);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .features::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 60%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 168, 83, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .features .section-header h2 {
+            color: white;
+        }
+
+        .features .section-header p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .features .section-tag {
+            color: var(--color-gold);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+            border-color: rgba(212, 168, 83, 0.3);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--color-gold), var(--color-gold-light));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-icon svg {
+            width: 30px;
+            height: 30px;
+            fill: var(--color-earth);
+        }
+
+        .feature-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* How It Works Detail */
+        .how-it-works {
+            padding: 8rem 4rem;
+            background: var(--color-cream);
+        }
+
+        .steps-detail {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .step-detail {
+            display: flex;
+            gap: 3rem;
+            align-items: flex-start;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .step-detail:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 40px;
+            top: 100px;
+            bottom: -3rem;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--color-burgundy), transparent);
+        }
+
+        .step-detail:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .step-detail:nth-child(even)::after {
+            left: auto;
+            right: 40px;
+        }
+
+        .step-visual {
+            flex: 0 0 300px;
+            position: relative;
+        }
+
+        .step-image {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: var(--color-cream-dark);
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(74, 55, 40, 0.1);
+        }
+
+        .step-image-inner {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--color-burgundy) 0%, var(--color-burgundy-dark) 100%);
+        }
+
+        .step-image-inner svg {
+            width: 80px;
+            height: 80px;
+            fill: var(--color-gold);
+            opacity: 0.8;
+        }
+
+        .step-badge {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            width: 80px;
+            height: 80px;
+            background: var(--color-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(212, 168, 83, 0.4);
+        }
+
+        .step-badge span {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--color-earth);
+        }
+
+        .step-content {
+            flex: 1;
+            padding-top: 1rem;
+        }
+
+        .step-content h3 {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            color: var(--color-earth);
+            margin-bottom: 1rem;
+        }
+
+        .step-content p {
+            color: var(--color-earth-light);
+            font-size: 1.05rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .step-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .step-feature {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: white;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--color-earth);
+            box-shadow: 0 2px 10px rgba(74, 55, 40, 0.05);
+        }
+
+        .step-feature svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--color-sage);
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 8rem 4rem;
+            background: linear-gradient(135deg, var(--color-earth) 0%, var(--color-earth-light) 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(212, 168, 83, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta h2 {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2.5rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem;
+            background: var(--color-earth);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--color-gold);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--color-gold);
+        }
+
+        .social-link svg {
+            width: 18px;
+            height: 18px;
+            fill: white;
+        }
+
+        .social-link:hover svg {
+            fill: var(--color-earth);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero h1 { font-size: 3rem; }
+            .hero-bg { width: 45%; clip-path: polygon(30% 0, 100% 0, 100% 100%, 10% 100%); }
+            .hero-pattern { width: 45%; clip-path: polygon(30% 0, 100% 0, 100% 100%, 10% 100%); }
+            .journey-path { flex-wrap: wrap; gap: 2rem; }
+            .journey-path::before { display: none; }
+            .journey-step { flex: 0 0 calc(33.333% - 1.5rem); }
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 1rem 1.5rem; }
+            .nav-links { display: none; }
+            .hero { padding: 6rem 1.5rem 3rem; flex-direction: column; }
+            .hero-bg, .hero-pattern { display: none; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
+            .journey { padding: 4rem 1.5rem; }
+            .journey-step { flex: 0 0 calc(50% - 1rem); }
+            .section-header h2 { font-size: 2rem; }
+            .features { padding: 4rem 1.5rem; }
+            .features-grid { grid-template-columns: 1fr; }
+            .how-it-works { padding: 4rem 1.5rem; }
+            .step-detail { flex-direction: column !important; gap: 1.5rem; }
+            .step-detail::after { display: none; }
+            .step-visual { flex: none; width: 100%; }
+            .cta { padding: 4rem 1.5rem; }
+            .cta h2 { font-size: 2rem; }
+            footer { padding: 2rem 1.5rem; }
+            .footer-content { flex-direction: column; text-align: center; }
+        }
+
+        /* Animations on scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="#" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            </div>
+            Clic Social Banking
+        </a>
+        <div class="nav-links">
+            <a href="#journey">How It Works</a>
+            <a href="#features">Features</a>
+            <a href="#steps">Get Started</a>
+            <a href="#" class="btn btn-primary">Download Wallet</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-pattern"></div>
+        <div class="hero-content">
+            <div class="hero-tag">Empowering Communities Through Finance</div>
+            <h1>Build Your Own <span>Social Bank</span> From The Ground Up</h1>
+            <p>Start with a group of friends. Grow into a fully-fledged community bank. The Clic Social Banking platform turns your community's financial dreams into reality.</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn btn-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.707 10.708L16.293 9.294 13 12.587V2h-2v10.587l-3.293-3.293-1.414 1.414L12 16.415l5.707-5.707z"/><path d="M18 18H6v-4H4v4c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-4h-2v4z"/></svg>
+                    Download Clic Wallet
+                </a>
+                <a href="#journey" class="btn btn-secondary">See How It Works</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-number">20+</div>
+                    <div class="stat-label">Members to start</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Simple steps</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Community owned</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journey Section -->
+    <section class="journey" id="journey">
+        <div class="section-header reveal">
+            <span class="section-tag">Your Journey</span>
+            <h2>From Download to Social Bank in 5 Steps</h2>
+            <p>We've made the path to running your own community bank simple, transparent, and rewarding</p>
+        </div>
+        <div class="journey-path">
+            <div class="journey-step reveal">
+                <div class="step-icon">
+                    <span class="step-number">1</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-burgundy)" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                </div>
+                <h3>Download Wallet</h3>
+                <p>Get the Clic Wallet app and create your secure account</p>
+            </div>
+            <div class="journey-step reveal">
+                <div class="step-icon">
+                    <span class="step-number">2</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-earth)" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <h3>Create Group</h3>
+                <p>Start a savings group within the Clic Wallet</p>
+            </div>
+            <div class="journey-step reveal">
+                <div class="step-icon">
+                    <span class="step-number">3</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                </div>
+                <h3>Invite Friends</h3>
+                <p>Build your community with at least 20 members</p>
+            </div>
+            <div class="journey-step reveal">
+                <div class="step-icon">
+                    <span class="step-number">4</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-sage)" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20"/><path d="M6 16h4"/></svg>
+                </div>
+                <h3>Practice Banking</h3>
+                <p>Save together, access group loans, learn the ropes</p>
+            </div>
+            <div class="journey-step reveal">
+                <div class="step-icon">
+                    <span class="step-number">5</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-burgundy-dark)" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21V12h6v9"/></svg>
+                </div>
+                <h3>Launch Social Bank</h3>
+                <p>Graduate to a full Social Bank on our platform</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-header reveal">
+            <span class="section-tag">Platform Features</span>
+            <h2>Everything You Need to Run a Community Bank</h2>
+            <p>Powered by a partnership with a licensed commercial bank for full regulatory compliance</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card reveal">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+                </div>
+                <h3>Bank-Grade Security</h3>
+                <p>Your community's funds are protected by the same security measures used by major financial institutions, backed by our commercial banking partner.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+                </div>
+                <h3>Savings & Loans</h3>
+                <p>Members can save together and access micro-loans from the group pool. Build credit history while strengthening community bonds.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                </div>
+                <h3>Transparent Records</h3>
+                <p>Every transaction is recorded and visible to all group members. Full transparency builds trust and accountability.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+                </div>
+                <h3>Growth Analytics</h3>
+                <p>Track your group's financial health with intuitive dashboards. See savings trends, loan performance, and member activity at a glance.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                </div>
+                <h3>Regulatory Compliance</h3>
+                <p>Operate within the law from day one. Our commercial bank partnership ensures your Social Bank meets all regulatory requirements.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
+                </div>
+                <h3>Smart Notifications</h3>
+                <p>Stay informed with real-time updates on contributions, loan requests, approvals, and important group milestones.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Detail -->
+    <section class="how-it-works" id="steps">
+        <div class="section-header reveal">
+            <span class="section-tag">Step By Step</span>
+            <h2>Your Path to Community Banking</h2>
+            <p>Here's exactly how to go from zero to running your own Social Bank</p>
+        </div>
+        <div class="steps-detail">
+            <div class="step-detail reveal">
+                <div class="step-visual">
+                    <div class="step-image">
+                        <div class="step-image-inner">
+                            <svg viewBox="0 0 24 24"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></svg>
+                        </div>
+                    </div>
+                    <div class="step-badge"><span>1</span></div>
+                </div>
+                <div class="step-content">
+                    <h3>Download & Register</h3>
+                    <p>Start by downloading the Clic Wallet from your app store. Registration takes just minutes—verify your phone number, create a secure PIN, and you're ready to go. Your wallet is your gateway to community banking.</p>
+                    <div class="step-features">
+                        <span class="step-feature">
+                            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                            Quick setup
+                        </span>
+                        <span class="step-feature">
+                            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                            Phone verification
+                        </span>
+                        <span class="step-feature">
+                            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                            Secure PIN
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-detail reveal">
+                <div class="step-visual">
+                    <div class="step-image">
+                        <div class="step-image-inner">
+                            <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                        </div>
+                    </div>
+                    <div class="step-badge"><span>2</span></div>
+                </div>
+                <div class="step-content">
+                    <h3>Create Your Savings Group</h3>
+                    <p>From within the Clic Wallet, create your first savings group. Give it a name that reflects your community, set your savings goals, and establish the basic rules that will govern how your group operates.</p>
+                    <div class="step-features">
+                        <span class="step-feature">
+                            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                            Custom group name
+                        </span>
+                        <span class="step-feature">
+                            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                            Set savings targets
+                        </span>
+                        <span class="step-feature">
+                            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                            Define group rules
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-detail reveal">
+                <div class="step-visual">
+                    <div class="step-image">
+                        <div class="step-image-inner">
+                            <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                        </div>
+                    </div>
+                    <div class="step-badge"><span>3</span></div>
+                </div>
+                <div class="step-content">
+                    <h3>Invite Your Community</h3>
+                    <p>Share your group invite link with friends, family, neighbors, or colleagues. You need a minimum of 20 members to qualify for Social Bank status. Each member downloads the wallet and joins your group.</p>
+                    <div class="step-features">
+                        <span class="step-feature">
+                            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                            Share invite links
+                        </span>
+                        <span class="step-feature">
+                            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                            20 member minimum
+                        </span>
+                        <span class="step-feature">
+                            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                            Track invitations
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-detail reveal">
+                <div class="step-visual">
+                    <div class="step-image">
+                        <div class="step-image-inner">
+                            <svg viewBox="0 0 24 24"><path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+                        </div>
+                    </div>
+                    <div class="step-badge"><span>4</span></div>
+                </div>
+                <div class="step-content">
+                    <h3>Practice Banking Together</h3>
+                    <p>This is where the magic happens. Your group can now save together, with members contributing regularly. Need funds? Apply for a group loan. This trial period lets everyone experience running a mini-bank before going full scale.</p>
+                    <div class="step-features">
+                        <span class="step-feature">
+                            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                            Group savings
+                        </span>
+                        <span class="step-feature">
+                            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                            Micro-loans
+                        </span>
+                        <span class="step-feature">
+                            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                            Build experience
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-detail reveal">
+                <div class="step-visual">
+                    <div class="step-image">
+                        <div class="step-image-inner">
+                            <svg viewBox="0 0 24 24"><path d="M4 10v7h3v-7H4zm6 0v7h3v-7h-3zM2 22h19v-3H2v3zm14-12v7h3v-7h-3zm-4.5-9L2 6v2h19V6l-9.5-5z"/></svg>
+                        </div>
+                    </div>
+                    <div class="step-badge"><span>5</span></div>
+                </div>
+                <div class="step-content">
+                    <h3>Launch Your Social Bank</h3>
+                    <p>Once you have 20+ active members and have demonstrated consistent group activity, you're eligible to upgrade to a full Social Bank on the Clic platform. This gives you access to enhanced features, higher limits, and official recognition as a community banking institution.</p>
+                    <div class="step-features">
+                        <span class="step-feature">
+                            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                            Official status
+                        </span>
+                        <span class="step-feature">
+                            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                            Enhanced features
+                        </span>
+                        <span class="step-feature">
+                            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                            Bank partnership
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="cta-content reveal">
+            <h2>Ready to Build Your Community Bank?</h2>
+            <p>Join thousands of community leaders who are transforming their neighborhoods through social banking. Your journey starts with a single download.</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-gold">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.707 10.708L16.293 9.294 13 12.587V2h-2v10.587l-3.293-3.293-1.414 1.414L12 16.415l5.707-5.707z"/><path d="M18 18H6v-4H4v4c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-4h-2v4z"/></svg>
+                    Download Clic Wallet Now
+                </a>
+                <a href="#" class="btn btn-secondary" style="border-color: rgba(255,255,255,0.3); color: white;">
+                    Talk to Our Team
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo-icon" style="width: 32px; height: 32px;">
+                    <svg viewBox="0 0 24 24" style="width: 18px; height: 18px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                </div>
+                Clic Social Banking
+            </div>
+            <div class="footer-links">
+                <a href="#">About Us</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Contact</a>
+                <a href="#">Help Center</a>
+            </div>
+            <div class="footer-social">
+                <a href="#" class="social-link">
+                    <svg viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+                </a>
+                <a href="#" class="social-link">
+                    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+                <a href="#" class="social-link">
+                    <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Reveal animations on scroll
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const revealPoint = 150;
+                
+                if (elementTop < windowHeight - revealPoint) {
+                    element.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
